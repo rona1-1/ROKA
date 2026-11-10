@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "functions": {
+    "api/**/*.js": { "maxDuration": 300 }
+  },
+  "rewrites": [
+    { "source": "/api/jobs/:id/process", "destination": "/api/jobs/[id]/process.js" },
+    { "source": "/api/jobs/:id/video", "destination": "/api/jobs/[id]/video.js" },
+    { "source": "/api/jobs/:id", "destination": "/api/jobs/[id]/index.js" },
+    { "source": "/api/jobs", "destination": "/api/jobs/index.js" },
+    { "source": "/api/upload", "destination": "/api/upload.js" },
+    { "source": "/api/config", "destination": "/api/config.js" },
+    { "source": "/api/cron", "destination": "/api/cron.js" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "crons": [
+    { "path": "/api/cron", "schedule": "0 3 * * *" }
+  ]
+}

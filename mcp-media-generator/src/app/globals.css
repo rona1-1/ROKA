@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0a0e1a;
+  --bg-card: #131826;
+  --bg-soft: #1a2133;
+  --border: #2a3245;
+  --text: #e6e9f0;
+  --text-soft: #9ba3b4;
+  --accent: #38bdf8;
+  --accent-2: #a78bfa;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --font-arabic: "Tajawal", "Cairo", system-ui, sans-serif;
+}
+
+html { direction: rtl; }
+body {
+  background: linear-gradient(180deg, #0a0e1a 0%, #0d1220 100%);
+  color: var(--text);
+  font-family: var(--font-arabic);
+  min-height: 100vh;
+}
+
+/* شريط تمرير أنيق */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 6px; }
+::-webkit-scrollbar-thumb:hover { background: #3a4258; }
+
+@layer components {
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.25rem;
+  }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    padding: 0.5rem 1rem; border-radius: 10px; font-weight: 600;
+    transition: all 0.15s; cursor: pointer; border: 1px solid transparent;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #fff;
+  }
+  .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+  .btn-ghost {
+    background: var(--bg-soft); color: var(--text); border-color: var(--border);
+  }
+  .btn-ghost:hover { background: #232b40; }
+  .btn-danger {
+    background: transparent; color: var(--danger); border-color: rgba(239,68,68,0.3);
+  }
+  .btn-danger:hover { background: rgba(239,68,68,0.1); }
+  .input {
+    width: 100%; padding: 0.6rem 0.9rem; border-radius: 10px;
+    background: var(--bg-soft); border: 1px solid var(--border); color: var(--text);
+    font-family: var(--font-arabic); font-size: 0.95rem;
+  }
+  .input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(56,189,248,0.15); }
+  .badge {
+    display: inline-flex; align-items: center; gap: 0.25rem;
+    padding: 0.15rem 0.6rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600;
+  }
+  .badge-success { background: rgba(16,185,129,0.15); color: var(--success); }
+  .badge-warning { background: rgba(245,158,11,0.15); color: var(--warning); }
+  .badge-danger { background: rgba(239,68,68,0.15); color: var(--danger); }
+  .badge-muted { background: rgba(155,163,180,0.15); color: var(--text-soft); }
+  .badge-info { background: rgba(56,189,248,0.15); color: var(--accent); }
+}
