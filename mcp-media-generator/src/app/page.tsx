@@ -370,11 +370,17 @@ function ServerConnection({ health, origin }: { health: Health | null; origin: s
       json: {
         mcpServers: {
           "media-generator": auth
-            ? { type: "http", url: mcpUrl, headers: { Authorization: `Bearer ${auth}` } }
-            : { type: "http", url: mcpUrl },
+            ? {
+                command: "npx",
+                args: ["-y", "mcp-remote", mcpUrl, "--header", `Authorization:Bearer ${auth}`],
+              }
+            : {
+                command: "npx",
+                args: ["-y", "mcp-remote", mcpUrl],
+              },
         },
       },
-      note: "ضع هذا في ملف claude_desktop_config.json ثم أعد تشغيل Claude Desktop.",
+      note: "ضع هذا في claude_desktop_config.json ثم أعد تشغيل Claude Desktop. mcp-remote يحوّل stdio ↔ HTTP. أو الأسهل: Settings ← Connectors ← Add custom connector والصق الرابط مباشرة.",
     },
     cursor: {
       json: {

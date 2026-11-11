@@ -276,7 +276,54 @@ git push -u origin main
 
 ---
 
-## 8) استكشاف الأخطاء
+## 8) الربط بـ Claude Desktop
+
+> **مهم:** Claude Desktop يستخدم stdio — `"type": "http"` **لا يعمل** في `claude_desktop_config.json`.
+> استخدم جسر `mcp-remote` أو أضفه من واجهة Connectors.
+
+### الطريقة 1 (الأسهل): من واجهة Claude
+1. افتح Claude Desktop → **Settings ← Connectors ← Add custom connector**
+2. الصق رابطك: `https://YOUR-VERCEL-URL.vercel.app/mcp`
+
+### الطريقة 2: عبر ملف التكوين (مع جسر mcp-remote)
+
+موقع الملف:
+- **macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
+- **Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
+- **Linux:** `~/.config/Claude/claude_desktop_config.json`
+
+```json
+{
+  "mcpServers": {
+    "media-generator": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://YOUR-VERCEL-URL.vercel.app/mcp"]
+    }
+  }
+}
+```
+
+مع Bearer token:
+```json
+{
+  "mcpServers": {
+    "media-generator": {
+      "command": "npx",
+      "args": [
+        "-y", "mcp-remote",
+        "https://YOUR-VERCEL-URL.vercel.app/mcp",
+        "--header", "Authorization:Bearer YOUR_TOKEN"
+      ]
+    }
+  }
+}
+```
+
+`mcp-remote` يحوّل stdio (يفهمه Claude) ↔ HTTP (خادمك على Vercel).
+
+---
+
+## 9) استكشاف الأخطاء
 
 ### `SQL_MANY_STATEMENTS`
 libSQL لا يقبل عبارات متعددة في سلسلة واحدة — كل عبارة في `batch` منفصلة. (تمت معالجته.)
